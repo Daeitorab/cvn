@@ -1,14 +1,14 @@
+html
 <!DOCTYPE html>
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بازی کلیکی</title>
+    <title>بازی جمع‌آوری الماس</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #282c34;
-            color: white;
+            background: linear-gradient(to bottom, #ffcc00, #ff6699);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,45 +19,83 @@
         .score-board {
             font-size: 24px;
             margin-bottom: 20px;
+            color: #fff;
         }
-        .clickable {
-            width: 200px;
-            height: 200px;
-            background: url('your-image-url.jpg') no-repeat center center;
-            background-size: cover;
+        .gem {
+            font-size: 100px;
             cursor: pointer;
-            border-radius: 10px;
             transition: transform 0.2s;
         }
-        .clickable:hover {
+        .gem:hover {
             transform: scale(1.1);
         }
-        button {
-            margin-top: 20px;
-            padding: 10px;
-            font-size: 16px;
+        .status {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 400px;
         }
     </style>
 </head>
 <body>
     <div class="score-board">
-        امتیاز: <span id="score">0</span>
+        امتیاز: <span id="score">0</span> | انرژی: <span id="energy">500</span>
     </div>
-    <div class="clickable" id="clickable"></div>
-    <button id="reset">تنظیم مجدد</button>
+    <div class="gem" id="gem">💎</div>
+    <div class="status">
+        <button id="frens">دوستان</button>
+        <button id="earn">کسب درآمد</button>
+        <button id="boost">تقویت</button>
+    </div>
 
     <script>
         let score = 0;
+        let energy = 500;
 
-        document.getElementById('clickable').addEventListener('click', () => {
-            score += 1; // افزایش امتیاز
-            document.getElementById('score').innerText = score;
+        // بررسی زمان آخرین تقویت
+        const lastBoostTime = localStorage.getItem('lastBoostTime');
+        const currentTime = Date.now();
+
+        if (lastBoostTime) {
+            const timeDifference = currentTime - lastBoostTime;
+            const oneDay = 24 * 60 * 60 * 1000; // یک روز به میلی‌ثانیه
+            if (timeDifference < oneDay) {
+                document.getElementById('boost').disabled = true;
+                document.getElementById('boost').innerText = 'تقویت (یک روز یک بار)';
+            }
+        }
+
+        document.getElementById('gem').addEventListener('click', () => {
+            score += 35; // امتیاز جمع‌آوری شده
+            energy -= 10; // انرژی مصرف شده
+            updateScore();
         });
 
-        document.getElementById('reset').addEventListener('click', () => {
-            score = 0; // باچ
+        function updateScore() {
             document.getElementById('score').innerText = score;
+            document.getElementById('energy').innerText = energy;
+        }
+
+        document.getElementById('frens').addEventListener('click', () => {
+            alert('دوستان:\n1. علی\n2. مریم\n3. رضا\n4. سارا');
+        });
+
+        document.getElementById('earn').addEventListener('click', () => {
+            alert('کسب درآمد: ویژگی فعلاً در دسترس نیست!');
+        });
+
+        document.getElementById('boost').addEventListener('click', () => {
+            if (energy >= 50) {
+                score += 100; // افزایش امتیاز
+                energy -= 50; // کاهش انرژی
+                updateScore();
+                localStorage.setItem('lastBoostTime', Date.now()); // ذخیره زمان تقویت
+                alert('تقویت فعال شد! 100 امتیاز به دست آوردید.');
+            } else {
+                alert('انرژی کافی برای تقویت ندارید!');
+            }
         });
     </script>
 </body>
 </html>
+
