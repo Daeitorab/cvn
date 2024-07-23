@@ -1,101 +1,75 @@
-html
 <!DOCTYPE html>
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بازی جمع‌آوری الماس</title>
+    <title>بوقلمون کوین</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #ffcc00, #ff6699);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
+            text-align: center;
         }
-        .score-board {
+        #gameArea {
+            margin: 20px;
+            border: 2px solid #4CAF50;
+            padding: 20px;
+            display: inline-block;
+        }
+        #score {
             font-size: 24px;
-            margin-bottom: 20px;
-            color: #fff;
+            margin: 10px;
         }
-        .gem {
-            font-size: 100px;
+        #energy {
+            font-size: 24px;
+            margin: 10px;
+            color: orange;
+        }
+        #clickButton {
+            padding: 10px 20px;
+            font-size: 18px;
             cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .gem:hover {
-            transform: scale(1.1);
-        }
-        .status {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            max-width: 400px;
         }
     </style>
 </head>
 <body>
-    <div class="score-board">
-        امتیاز: <span id="score">0</span> | انرژی: <span id="energy">500</span>
-    </div>
-    <div class="gem" id="gem">💎</div>
-    <div class="status">
-        <button id="frens">دوستان</button>
-        <button id="earn">کسب درآمد</button>
-        <button id="boost">تقویت</button>
+    <h1>بوقلمون کوین</h1>
+    <div id="gameArea">
+        <div id="score">امتیاز: 0</div>
+        <div id="energy">انرژی: 5</div>
+        <button id="clickButton">🦃</button>
     </div>
 
     <script>
-        let score = 0;
-        let energy = 500;
+        let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
+        let energy = localStorage.getItem('energy') ? parseInt(localStorage.getItem('energy')) : 5;
+        const scoreDisplay = document.getElementById('score');
+        const energyDisplay = document.getElementById('energy');
+        const clickButton = document.getElementById('clickButton');
 
-        // بررسی زمان آخرین تقویت
-        const lastBoostTime = localStorage.getItem('lastBoostTime');
-        const currentTime = Date.now();
+        scoreDisplay.textContent = `امتیاز: ${score}`;
+        energyDisplay.textContent = `انرژی: ${energy}`;
 
-        if (lastBoostTime) {
-            const timeDifference = currentTime - lastBoostTime;
-            const oneDay = 24 * 60 * 60 * 1000; // یک روز به میلی‌ثانیه
-            if (timeDifference < oneDay) {
-                document.getElementById('boost').disabled = true;
-                document.getElementById('boost').innerText = 'تقویت (یک روز یک بار)';
-            }
-        }
-
-        document.getElementById('gem').addEventListener('click', () => {
-            score += 35; // امتیاز جمع‌آوری شده
-            energy -= 10; // انرژی مصرف شده
-            updateScore();
-        });
-
-        function updateScore() {
-            document.getElementById('score').innerText = score;
-            document.getElementById('energy').innerText = energy;
-        }
-
-        document.getElementById('frens').addEventListener('click', () => {
-            alert('دوستان:\n1. علی\n2. مریم\n3. رضا\n4. سارا');
-        });
-
-        document.getElementById('earn').addEventListener('click', () => {
-            alert('کسب درآمد: ویژگی فعلاً در دسترس نیست!');
-        });
-
-        document.getElementById('boost').addEventListener('click', () => {
-            if (energy >= 50) {
-                score += 100; // افزایش امتیاز
-                energy -= 50; // کاهش انرژی
-                updateScore();
-                localStorage.setItem('lastBoostTime', Date.now()); // ذخیره زمان تقویت
-                alert('تقویت فعال شد! 100 امتیاز به دست آوردید.');
+        clickButton.addEventListener('click', () => {
+            if (energy > 0) {
+                score++;
+                energy--;
+                scoreDisplay.textContent = `امتیاز: ${score}`;
+                energyDisplay.textContent = `انرژی: ${energy}`;
+                localStorage.setItem('score', score);
+                localStorage.setItem('energy', energy);
             } else {
-                alert('انرژی کافی برای تقویت ندارید!');
+                alert("انرژی شما تمام شده است!");
             }
         });
+
+        // شارژ انرژی هر 1 ثانیه
+        setInterval(() => {
+            if (energy < 1000) {
+                energy++;
+                energyDisplay.textContent = `انرژی: ${energy}`;
+                localStorage.setItem('energy', energy);
+            }
+        }, 1000);
     </script>
 </body>
 </html>
-
